@@ -31,7 +31,7 @@ export default {
 			});
 			const response = chatCompletion.choices[0].message;
 
-			return new Response('Hello from my OpenAI API Worker!');
+			return new Response(JSON.stringify(response));
 		} catch (e) {
 			return new Response(e);
 		}
