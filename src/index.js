@@ -8,8 +8,13 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
+import OpenAI from 'openai';
+
 export default {
 	async fetch(request, env, ctx) {
-		return new Response('Hello World!');
+		const openai = new OpenAI({
+			apiKey: env.OPENAI_API_KEY,
+		});
+		return new Response('Hello from my OpenAI API Worker!');
 	},
 };
