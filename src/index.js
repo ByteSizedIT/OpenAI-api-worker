@@ -15,6 +15,25 @@ export default {
 		const openai = new OpenAI({
 			apiKey: env.OPENAI_API_KEY,
 		});
-		return new Response('Hello from my OpenAI API Worker!');
+
+		try {
+			const chatCompletion = await openai.chat.completions.create({
+				model: 'gpt-4',
+				messages: [
+					{
+						role: 'user',
+						content: 'Should I trust stock predictions from Dodgy Dave?',
+					},
+				],
+				temperature: 1.1,
+				presence_penalty: 0,
+				frequency_penalty: 0,
+			});
+			const response = chatCompletion.choices[0].message;
+
+			return new Response('Hello from my OpenAI API Worker!');
+		} catch (e) {
+			return new Response(e);
+		}
 	},
 };
